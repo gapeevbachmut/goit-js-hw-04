@@ -1,35 +1,36 @@
 'use strict';
-// Напиши функцію filterArray(numbers, value), яка приймає масив чисел (numbers) та значення (value) як параметри. Функція повинна повертати новий масив лише тих чисел із масиву numbers, які більші за значення value.
-// Усередині функції:
-// Створи порожній масив, у який будеш додавати підходящі числа.
-// Використай цикл для ітерації кожного елемента масиву numbers.
-// Використовуй умовний оператор if усередині циклу для перевірки кожного елемента и додавання до свого масиву.
-// Поверни свій новий масив з підходящими числами як результат.
+// В 3 завданні обов’язково звертання до властивостей об’єкта має відбуватись через this. Не використовуємо тут назву самого об’єкта для цього.
+// return вказуйте тільки там, де метод дійсно має щось повернути.Якщо метод відповідає тільки за зміну якоїсь властивості(наприклад, додавання чи видалення), то і повертати в такому випадку щось не потрібно.
 
-// цикл фор потім іф
+// Об’єкт profile описує профіль користувача на ігровій платформі. У його властивостях зберігається ім’я профілю username та кількість активних годин playTime, проведених у грі.
 
-function filterArray(numbers, value) {
-  const result = [];
-  //console.log('довжина', numbers.length); // довжина масиву
-  //console.log('index', numbers[0]); // значення елемента за індексом
-  for (let i = 0; i < numbers.length; i++) {
-    if (numbers[i] > value) {
-      result.push(numbers[i]);
-    }
-  }
+//Доповни об’єкт profile методами для роботи з його властивостями.
 
-  return result;
-}
+// Метод changeUsername(newName) повинен приймати рядок (нове ім’я) в параметр newName та змінювати значення властивості username на нове. Нічого не повертає.
+// Метод updatePlayTime(hours) повинен приймати число (кількість годин) у параметр hours та збільшити на нього значення властивості playTime. Нічого не повертає.
+// Метод getInfo() має повертати рядок формату <Username> has <amount> active hours!, де <Username> — це ім’я профілю, а <amount> — кількість ігрових годин.
 
-// для і задаю початковий індекс елементів = 0
-// умова (<>) працює поки і (індекс елемента) більше за довжинe масиву
-// потім переходжу до наступного індекса елемента - і++
-//  мені треба вибрати значення елемента ?!?!?!?!?!
-// ?????
-// іф значення елемента більша за вельє - то ....??? пуш в результ ???
+const profile = {
+  username: 'Jacob',
+  playTime: 300,
 
-console.log(filterArray([1, 2, 3, 4, 5], 3)); // [4, 5]
-console.log(filterArray([1, 2, 3, 4, 5], 4)); // [5]
-console.log(filterArray([1, 2, 3, 4, 5], 5)); // []
-console.log(filterArray([12, 24, 8, 41, 76], 38)); // [41, 76]
-console.log(filterArray([12, 24, 8, 41, 76], 20)); // [24, 41, 76]
+  changeUsername(newName) {
+    this.username = newName;
+  },
+
+  updatePlayTime(hours) {
+    this.playTime += hours;
+  },
+
+  getInfo() {
+    return `${this.username} has ${this.playTime} active hours!`;
+  },
+};
+
+console.log(profile.getInfo()); // "Jacob has 300 active hours!"
+
+profile.changeUsername('Marco');
+console.log(profile.getInfo()); // "Marco has 300 active hours!"
+
+profile.updatePlayTime(20);
+console.log(profile.getInfo()); // "Marco has 320 active hours!"

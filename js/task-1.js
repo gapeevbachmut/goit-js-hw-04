@@ -1,28 +1,36 @@
 'use strict';
 
-// Напиши функцію slugify(title), яка приймає заголовок статті, параметр title і повертає slug, створений із цього рядка.
-// Slug — це завжди рядок у нижньому регістрі, слова якого розділені тире.
-// Значенням параметра title будуть рядки, слова яких розділені лише пробілами.
-// Усі символи slug повинні бути в нижньому регістрі.
-// Усі слова slug повинні бути розділені тире.
-// Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи. У консоль будуть виведені результати її роботи.
+// Напиши функцію isEnoughCapacity(products, containerSize), яка обчислює, чи помістяться всі товари в контейнер при пакуванні.
 
-function slugify(title) {
-  // перевести у нижній регістр - toLowerCase()
-  // рядок на масив - Метод split() з пробілом
-  // масив у рядок з тире - масиву join(delimiter) дозволяє об'єднати елементи масиву в рядок.  // додати тире - джоіном
-  // вивести рядок slug
-  //console.log('inf', title);
-  const titleLow = title.toLowerCase();
-  //console.log('Low', titleLow);
-  const titleArr = titleLow.split(' ');
-  //console.log('Arr', titleArr);
-  const slug = titleArr.join('-');
-  //console.log('Join', slug);
-  return slug;
+// Функція оголошує два параметри:
+
+// products — об’єкт, у якому ключі містять назви товарів, а їхні значення — кількість цих товарів. Наприклад, { apples: 2, grapes: 4 }.
+// containerSize — число, максимальна кількість одиниць товарів, яку в себе може вмістити контейнер.
+// Функція має повернути результат перевірки, чи помістяться всі товари в контейнер. Тобто порахувати загальну кількість товарів в об’єкті products і повернути true, якщо вона менше або дорівнює containerSize, і false, якщо ні.
+
+function isEnoughCapacity(products, containerSize) {
+  // console.log('p', products);
+  // console.log('cont', containerSize);
+  //console.log('arr', Object.values(products)); //           це масив
+  let totalFruits = 0;
+  const quantityFruits = Object.values(products); //  створити з об'єкта масив значень властивостей
+
+  //перебрати масив та скласти значення
+  for (const values of quantityFruits) {
+    totalFruits += values;
+  }
+  //console.log('t', totalFruits);
+  // if (totalFruits <= containerSize) {
+  //   //console.log('t', totalFruits);
+  //   return true;
+  // } else {
+  //   return false;
+  // }
+  // або так
+  return totalFruits <= containerSize;
 }
 
-console.log(slugify('Arrays for beginners')); // "arrays-for-beginners"
-console.log(slugify('English for developer')); // "english-for-developer"
-console.log(slugify('Ten secrets of JavaScript')); // "ten-secrets-of-javascript"
-console.log(slugify('How to become a JUNIOR developer in TWO WEEKS')); // "how-to-become-a-junior-developer-in-two-weeks"
+console.log(isEnoughCapacity({ apples: 2, grapes: 3, carrots: 1 }, 8)); // true
+console.log(isEnoughCapacity({ apples: 4, grapes: 6, lime: 16 }, 12)); // false
+console.log(isEnoughCapacity({ apples: 1, lime: 5, tomatoes: 3 }, 14)); // true
+console.log(isEnoughCapacity({ apples: 18, potatoes: 5, oranges: 2 }, 7)); // false

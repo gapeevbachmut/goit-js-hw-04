@@ -1,36 +1,48 @@
 'use strict';
-// Задача 2. Композиція масивів
-// Виконуй це завдання у файлі task-2.js
-// Напиши функцію під назвою makeArray, яка приймає три параметри: firstArray (масив), secondArray (масив) і maxLength (число). Функція повинна створювати новий масив, який містить усі елементи з firstArray, а потім усі елементи з secondArray.
-// Якщо кількість елементів у новому масиві перевищує maxLength, функція повинна повернути копію масиву з довжиною maxLength елементів.
-// В іншому випадку функція повинна повернути весь новий масив.
-// Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи. У консоль будуть виведені результати її роботи.
 
-function makeArray(firstArray, secondArray, maxLength) {
-  //  злиття двох масивів через конкат!!!
-  // іф нью.ленс більше числа поветрае нью з 0 до кількість числа - слайс
-  // елс повертає рядок як є
-  //console.log('All', firstArray, secondArray, maxLength);
-  const newArray = firstArray.concat(secondArray);
-  //console.log('New', newArray);
-  //console.log('length', newArray.length);
+// Напиши функцію calcAverageCalories(days), яка повертає середньодобове значення кількості калорій, які спортсмен споживав протягом тижня. Функція очікує один параметр: days — масив об’єктів. Кожен об’єкт описує день тижня та кількість калорій calories, спожитих спортсменом, у цей день. Візьми код нижче і встав після оголошення своєї функції для перевірки коректності її роботи. У консоль будуть виведені результати її викликів.
+// значення властивості "калорій" скласти та розділити на їх кількість, або кількість днів
+// зробити з масива  - об'єкти - ???
 
-  if (newArray.length > maxLength) {
-    return newArray.slice(0, maxLength);
-  } else {
-    return newArray;
+//У 2 завданні не забудьте про перевірку довжини масива - якщо масив пустий, то і рахувати нічого не треба, повертайте одразу з функції 0. І перевірте, щоб у вас не поверталось NaN в такому випадку.
+
+function calcAverageCalories(days) {
+  let totalCalories = 0;
+  //console.log(days.length);
+  for (const day of days) {
+    totalCalories += day.calories;
   }
+  if (days.length === 0) {
+    return 0;
+  }
+  //console.log('c', totalCalories / 7);
+  //console.log('b', totalCalories);
+  //console.log('c', totalCalories / days.length); /// працює!!!!
+  return totalCalories / days.length;
 }
 
-console.log(makeArray(['Mango', 'Poly'], ['Ajax', 'Chelsea'], 3)); // ["Mango", "Poly", "Ajax"]
-// 4 > 3 true - 0.1.2
-console.log(makeArray(['Mango', 'Poly', 'Houston'], ['Ajax', 'Chelsea'], 4)); // ["Mango", "Poly", "Houston", "Ajax"]
-// 5 > 4 true - 0.1.2.3
-console.log(makeArray(['Mango'], ['Ajax', 'Chelsea', 'Poly', 'Houston'], 3)); // ["Mango", "Ajax", "Chelsea"]
-// 5 > 3 true - 0.1.2
-console.log(makeArray(['Earth', 'Jupiter'], ['Neptune', 'Uranus'], 2)); // ["Earth", "Jupiter"]
-// 4 > 2 true - 0.1
-console.log(makeArray(['Earth', 'Jupiter'], ['Neptune', 'Uranus'], 4)); // ["Earth", "Jupiter", "Neptune", "Uranus"]
-// 4 > 4 false - all
-console.log(makeArray(['Earth', 'Jupiter'], ['Neptune', 'Uranus', 'Venus'], 0)); // []
-// 5 > 0 true - (0, 0) - []
+console.log(
+  calcAverageCalories([
+    { day: 'monday', calories: 3010 },
+    { day: 'tuesday', calories: 3200 },
+    { day: 'wednesday', calories: 3120 },
+    { day: 'thursday', calories: 2900 },
+    { day: 'friday', calories: 3450 },
+    { day: 'saturday', calories: 3280 },
+    { day: 'sunday', calories: 3300 },
+  ])
+); // 3180
+
+console.log(
+  calcAverageCalories([
+    { day: 'monday', calories: 2040 },
+    { day: 'tuesday', calories: 2270 },
+    { day: 'wednesday', calories: 2420 },
+    { day: 'thursday', calories: 1900 },
+    { day: 'friday', calories: 2370 },
+    { day: 'saturday', calories: 2280 },
+    { day: 'sunday', calories: 2610 },
+  ])
+); // 2270
+
+console.log(calcAverageCalories([])); // 0
